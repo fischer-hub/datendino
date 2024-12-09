@@ -22,24 +22,31 @@ function update ()
 
         if (!gameOver) {
 
+
+            if ((blinkingTimer >= 0) && ((score - blinkingTimerDelta) > 1)){
+                player.visible = !player.visible
+                blinkingTimerDelta = score;
+                blinkingTimer--;
+
             if ((player.body.blocked.down || player.body.touching.down) && (cursors.SPACE.isDown ||  cursors.up.isDown || this.touchDown))
                 {
                     player.setVelocityY(-1900);
                     player.body.gravity.y = 1000;
-                    console.log('jump')
                     firstSpace = true;
                     this.touchDown = false;
                 }
 
             this.background.setTilePosition(this.cameras.main.scrollX);
             this.ground_img.setTilePosition(this.cameras.main.scrollX);
-            elapsedSeconds = Math.floor((Date.now() - startTime) / 100);
-            if (firstSpace) {scoreText.setText('Score: ' + elapsedSeconds);}
+            score = Math.floor((Date.now() - startTime) / 100);
+            if (firstSpace) {scoreText.setText('Score: ' + score);}
             
             if (bar.x < -10){
                 bar.x = window.screen.width + 10;
-                heart.x = window.screen.width + (Math.floor(Math.random() * (800 - 1 + 1)) + 1);
                 bar.y = Math.floor(Math.random() * (800 - 600 + 1)) + 600;
+            }else if (heart.x < -10){
+                heart.x = window.screen.width + (Math.floor(Math.random() * (800 - 1 + 1)) + 1);
+                heart.visible = true;
             } else{
                 bar.x += -speed;
                 heart.x += -speed;

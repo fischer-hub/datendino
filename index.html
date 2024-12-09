@@ -62,19 +62,42 @@
     let speed = 8;
     let gameOver = false;
     let firstSpace = false;
+    let numHearts = 1;
+    let heartCollectTime = 0;
+    let obstacleCollisionTime = 0;
+    let blinkingTimer = 1;
+    let blinkingTimerDelta = 0;
 
 
-    function collectHearts (player, star)
+    function collectHearts (player, heart)
     {
-        star.disableBody(true, true);
+        heart.visible = false;
 
+        // make sure we dont collect more than one heart in a very short time because of weird overlap triggers
+        if ((parseInt(numHearts) <= 3) && ((score - heartCollectTime) > 15)) {
+            numHearts++;
+            heartCollectTime = score;
+
+            if (numHearts == 2){ heartDisplay2.visible = true;}
+            if (numHearts == 3){ heartDisplay3.visible = true;}
+        }
     }
 
     function hitObstacle (player)
     {
+        if ((score - obstacleCollisionTime) > 10) {
 
-        console.log('hit!')
-        gameOver = true;
+            numHearts--;
+            obstacleCollisionTime = score;
+            blinkingTimer = 5;
+        }
+
+        if (numHearts == 2){ heartDisplay3.visible = false;}
+        if (numHearts == 1){ heartDisplay2.visible = false;}
+        if (numHearts == 0){ heartDisplay1.visible = false;}
+        
+
+        if(parseInt(numHearts) == 0){ gameOver = true; }
     }
 
 </script>

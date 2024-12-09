@@ -34,6 +34,17 @@ function create ()
     heart = this.physics.add.sprite(window.screen.width + 50 , 615, 'heart');
     heart.body.setAllowGravity(false);
 
+    heartDisplay1 = this.physics.add.sprite(window.screen.width - 150 , 50, 'heart');
+    heartDisplay1.body.setAllowGravity(false);
+    heartDisplay2 = this.physics.add.sprite(window.screen.width - 100 , 50, 'heart');
+    heartDisplay2.body.setAllowGravity(false);
+    heartDisplay2.visible = false;
+    heartDisplay3 = this.physics.add.sprite(window.screen.width - 50 , 50, 'heart');
+    heartDisplay3.body.setAllowGravity(false);
+    heartDisplay3.visible = false;
+
+
+
 
     // create animation for player object
     //this.anims.create({
@@ -50,8 +61,6 @@ function create ()
     cursors = this.input.keyboard.addKeys('SPACE,up');
     this.input.on('pointerdown', function (pointer)
     {
-
-        console.log(this.game.loop.frame, 'down B');
 
         this.touchDown = true;
 
