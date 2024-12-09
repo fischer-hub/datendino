@@ -27,6 +27,7 @@ function update ()
                 player.visible = !player.visible
                 blinkingTimerDelta = score;
                 blinkingTimer--;
+            }
 
             if ((player.body.blocked.down || player.body.touching.down) && (cursors.SPACE.isDown ||  cursors.up.isDown || this.touchDown))
                 {
@@ -56,3 +57,4 @@ function update ()
         }
 
     }
+    
