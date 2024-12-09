@@ -18,14 +18,19 @@ function create ()
     //platforms.create(window.screen.width, 600, 'ground');
 
     // create player object
-    player = this.physics.add.sprite(100, 450, 'data_dino');
-    player.setBounce(0.2);
+    player = this.physics.add.sprite(200, 450, 'data_dino');
+    player.setBounce(0);
     player.setCollideWorldBounds(true);
 
     // create invisible ground to collide with, and put texture over it because i dont know any better
     ground = this.physics.add.image(0, 680, 'ground_invis').setScale(2).refreshBody();
     ground.setCollideWorldBounds(true);
 
+    bar = this.physics.add.sprite(window.screen.width + 10 , 450, 'bar');
+    bar.body.setAllowGravity(false);
+    //bar.setTint = '#4287f5';
+    //bar.setCollideWorldBounds(false);
+    
 
 
 
@@ -41,7 +46,16 @@ function create ()
     this.physics.add.collider(player, ground);
 
     // create cursor keys object (check up down left right keys)
-    cursors = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.addKeys('SPACE,up');
+    this.input.on('pointerdown', function (pointer)
+    {
+
+        console.log(this.game.loop.frame, 'down B');
+
+        this.touchDown = true;
+
+    }, this);
+
 
     // add collectable
     stars = this.physics.add.group({
@@ -50,15 +64,17 @@ function create ()
         setXY: { x: 12, y: 0, stepX: 70 }
     });
 
-    stars.children.iterate(function (child) {
+/*     stars.children.iterate(function (child) {
 
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
-    });
+    }); */
     
     this.physics.add.collider(stars, ground);
-    this.physics.add.overlap(player, stars, collectStar, null, this);
+    this.physics.add.overlap(player, stars, collectStar);
+    this.physics.add.overlap(player, bar, hitObstacle);
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'press space', { fontSize: '32px', fill: '#000' });
+
 
 }

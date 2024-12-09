@@ -29,7 +29,7 @@
         physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 2000 },
             debug: false
             }
         },
@@ -57,14 +57,23 @@
     var game = new Phaser.Game(config);
     var score = 0;
     var scoreText;
+    let startTime = Date.now();
+    let speed = 5;
+    let gameOver = false;
+    let firstSpace = false;
 
 
     function collectStar (player, star)
     {
         star.disableBody(true, true);
 
-        score += 10;
-        scoreText.setText('Score: ' + score);
+    }
+
+    function hitObstacle (player)
+    {
+
+        console.log('hit!')
+        gameOver = true;
     }
 
 </script>
