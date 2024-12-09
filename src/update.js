@@ -24,8 +24,8 @@ function update ()
 
             if ((player.body.blocked.down || player.body.touching.down) && (cursors.SPACE.isDown ||  cursors.up.isDown || this.touchDown))
                 {
-                    player.setVelocityY(-2500);
-                    player.body.gravity.y = 6000;
+                    player.setVelocityY(-1900);
+                    player.body.gravity.y = 1000;
                     console.log('jump')
                     firstSpace = true;
                     this.touchDown = false;
@@ -35,7 +35,15 @@ function update ()
             this.ground_img.setTilePosition(this.cameras.main.scrollX);
             elapsedSeconds = Math.floor((Date.now() - startTime) / 100);
             if (firstSpace) {scoreText.setText('Score: ' + elapsedSeconds);}
-            bar.x += -speed;
+            
+            if (bar.x < -10){
+                bar.x = window.screen.width + 10;
+                heart.x = window.screen.width + (Math.floor(Math.random() * (800 - 1 + 1)) + 1);
+                bar.y = Math.floor(Math.random() * (800 - 600 + 1)) + 600;
+            } else{
+                bar.x += -speed;
+                heart.x += -speed;
+            }
         } else {
             this.add.text((window.screen.width / 2) - 350, 350 , 'bist du dumm du sollst da rueber springen', { fontSize: '32px', fill: '#000' });
         }

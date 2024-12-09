@@ -26,12 +26,13 @@ function create ()
     ground = this.physics.add.image(0, 680, 'ground_invis').setScale(2).refreshBody();
     ground.setCollideWorldBounds(true);
 
-    bar = this.physics.add.sprite(window.screen.width + 10 , 450, 'bar');
+    bar = this.physics.add.sprite(window.screen.width + 10 , 800, 'bar');
     bar.body.setAllowGravity(false);
     //bar.setTint = '#4287f5';
     //bar.setCollideWorldBounds(false);
     
-
+    heart = this.physics.add.sprite(window.screen.width + 50 , 615, 'heart');
+    heart.body.setAllowGravity(false);
 
 
     // create animation for player object
@@ -58,20 +59,20 @@ function create ()
 
 
     // add collectable
-    stars = this.physics.add.group({
+    /* stars = this.physics.add.group({
         key: 'star',
         repeat: 5,
         setXY: { x: 12, y: 0, stepX: 70 }
     });
-
+ */
 /*     stars.children.iterate(function (child) {
 
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     }); */
     
-    this.physics.add.collider(stars, ground);
-    this.physics.add.overlap(player, stars, collectStar);
+    //this.physics.add.collider(heart, ground);
+    this.physics.add.overlap(player, heart, collectHearts);
     this.physics.add.overlap(player, bar, hitObstacle);
 
     scoreText = this.add.text(16, 16, 'press space', { fontSize: '32px', fill: '#000' });
