@@ -164,7 +164,7 @@ function create ()
     this.physics.add.overlap(player, bar, hitObstacle);
     this.physics.add.overlap(player, pascal, hitObstacle);
 
-    scoreText = this.add.text(16, 16, 'press space', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'press  to jump', { fontSize: '32px', fill: '#000' });
     enterUsernameText = this.add.text((window.screen.width / 2) - 350, 550 , username, { fontSize: '32px', fill: '#000' });
     loseText = this.add.text((window.screen.width / 2) - 200, 350 , 'better luck next time..', { fontSize: '32px', fill: '#000' });
     loseText.visible = false;
