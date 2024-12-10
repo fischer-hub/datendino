@@ -26,7 +26,7 @@ function create ()
     ground = this.physics.add.image(0, 680, 'ground_invis').setScale(2).refreshBody();
     ground.setCollideWorldBounds(true);
 
-    bar = this.physics.add.sprite(window.screen.width + 10 , 800, 'bar');
+    bar = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar');
     bar.body.setAllowGravity(false);
     //bar.setTint = '#4287f5';
     //bar.setCollideWorldBounds(false);
@@ -43,7 +43,28 @@ function create ()
     heartDisplay3.body.setAllowGravity(false);
     heartDisplay3.visible = false;
 
+    playButton = this.add.text((window.screen.width /2) - 150, 315, 'click to play!', { fontSize: '32px', fill: '#000' });
+    playButton.setInteractive();
+    playButton.on('pointerdown', () => { 
+        pause = false;
+        playButton.visible = false;
+        startTime = Date.now();
+        firstSpace = true;
+    });
 
+    playAgainButton = this.add.text((window.screen.width /2) - 180, 315, 'click to play again!', { fontSize: '32px', fill: '#000' });
+    playAgainButton.setInteractive();
+    playAgainButton.on('pointerdown', () => {
+        pause = false;
+        playAgainButton.visible = false;
+        startTime = Date.now();
+        firstSpace = true;
+        init();
+        gameOver = false;
+        console.log('again')
+        loseText.visible = false;
+    });
+    playAgainButton.visible = false;
 
 
     // create animation for player object

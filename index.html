@@ -65,16 +65,34 @@
     let numHearts = 1;
     let heartCollectTime = 0;
     let obstacleCollisionTime = 0;
-    let blinkingTimer = 1;
+    let blinkingTimer = 0;
     let blinkingTimerDelta = 0;
-
+    let pause = true;
+    
+    function init (){
+        score = 0;
+        scoreText;
+        startTime = Date.now();
+        speed = 8;
+        gameOver = false;
+        firstSpace = true;
+        numHearts = 1;
+        heartCollectTime = 0;
+        obstacleCollisionTime = 0;
+        blinkingTimer = 0;
+        blinkingTimerDelta = 0;
+        pause = false;
+        bar.x = window.screen.width + 20;
+        heart.x = window.screen.width + 50;
+        heartDisplay1.visible = true;
+    }
 
     function collectHearts (player, heart)
     {
         heart.visible = false;
 
         // make sure we dont collect more than one heart in a very short time because of weird overlap triggers
-        if ((parseInt(numHearts) <= 3) && ((score - heartCollectTime) > 15)) {
+        if ((numHearts <= 3) && ((score - heartCollectTime) > 15)) {
             numHearts++;
             heartCollectTime = score;
 
@@ -85,11 +103,14 @@
 
     function hitObstacle (player)
     {
-        if ((score - obstacleCollisionTime) > 10) {
+        if ((score - obstacleCollisionTime) > 10 && firstSpace && !gameOver && !pause) {
 
             numHearts--;
             obstacleCollisionTime = score;
-            blinkingTimer = 5;
+            blinkingTimer = 6;
+        }
+        if (score < 10) {
+            blinkingTimer = 0;
         }
 
         if (numHearts == 2){ heartDisplay3.visible = false;}
@@ -97,7 +118,7 @@
         if (numHearts == 0){ heartDisplay1.visible = false;}
         
 
-        if(parseInt(numHearts) == 0){ gameOver = true; }
+        if(parseInt(numHearts) <= 0){ gameOver = true; }
     }
 
 </script>
