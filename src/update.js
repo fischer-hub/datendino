@@ -58,7 +58,31 @@ function update ()
             }
         } else if (gameOver) {
             playAgainButton.visible = true;
-            loseText = this.add.text((window.screen.width / 2) - 350, 350 , 'bist du dumm du sollst da rueber springen', { fontSize: '32px', fill: '#000' });
+            leaderBoardButton.visible = true;
+
+            this.input.keyboard.on('keydown', (event) => {
+
+                if (score - deltaType > 0.5){
+                    deltaType = score;
+
+                    // Implement backspace
+                    if (event.keyCode === 8 && username.length > 0) {
+                        username = username.slice(0, -1);
+                        console.log('back')
+                        
+                    // Add any other characters you want to allow    
+                    } else if (event.key.length === 1 && event.key.match(/[a-zA-Z0-9\s\-_]/) && username.length <= 13) {
+                        username += event.key;
+
+                    } else if (event.keyCode === 13 && username.length > 0){
+                        console.log('enter')
+                        insertData({score: score, created_at: dateFns.format(new Date(), 'MM-dd-y HH:mm:SS'), username: username});
+                    }
+                enterUsernameText.destroy();
+                enterUsernameText = this.add.text((window.screen.width / 2) - 350, 150 , username, { fontSize: '32px', fill: '#000' });
+
+                }
+            });
 
         }
 

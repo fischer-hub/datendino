@@ -8,11 +8,6 @@ function create ()
     this.background = this.add.tileSprite(0, 0, window.screen.width, 700, 'bg').setOrigin(0).setScrollFactor(0, 1);
     this.ground_img = this.add.tileSprite(0, 630, window.screen.width, 50, 'ground').setScale(2).setOrigin(0).setScrollFactor(0, 1);
     
-
-    // create physics object for platforms
-    //platforms = this.physics.add.staticGroup();
-
-    // create platform objects
     //ground = this.physics.add.tileSprite(0, 0, window.screen.width / 2, 680, 'ground').setOrigin(0).setScrollFactor(0,1);
     //platforms.create(0, 650, 'ground').setScale(2).refreshBody();
     //platforms.create(window.screen.width, 600, 'ground');
@@ -43,6 +38,40 @@ function create ()
     heartDisplay3.body.setAllowGravity(false);
     heartDisplay3.visible = false;
 
+    leaderBoardButton = this.add.text((window.screen.width / 2) - 175, 485, 'show leaderboard', { fontSize: '32px', fill: '#000' });
+    leaderBoardButton.setInteractive();
+    leaderBoardButton.on('pointerdown', () => { 
+        leaderBoardButton.visible = false;
+        loseText.visible = false;
+        enterName.visible = false;
+        enterUsernameText.destroy();
+        playAgainButton.visible = false;
+        leaderboardBG.visible = true;
+        (async () => {leaderboardData = await fetchData()})()
+        leaderboardData.sort(function (a, b) {return b.score - a.score});
+        backButton.visible = true;
+
+        leaderBoardGroup = this.add.group()
+        leaderboardTitel = this.add.text((window.screen.width / 2) - 399, 100 , 'rank         name         date      score', { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+        
+        try {
+            row1 =             this.add.text((window.screen.width / 2) - 399, 150 , `   1${leaderboardData[0].username.padStart(13)}${dateFns.format(leaderboardData[0].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[0].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row2 =             this.add.text((window.screen.width / 2) - 399, 200 , `   2${leaderboardData[1].username.padStart(13)}${dateFns.format(leaderboardData[1].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[1].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row3 =             this.add.text((window.screen.width / 2) - 399, 250 , `   3${leaderboardData[2].username.padStart(13)}${dateFns.format(leaderboardData[2].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[2].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row4 =             this.add.text((window.screen.width / 2) - 399, 300 , `   4${leaderboardData[3].username.padStart(13)}${dateFns.format(leaderboardData[3].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[3].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row5 =             this.add.text((window.screen.width / 2) - 399, 350 , `   5${leaderboardData[4].username.padStart(13)}${dateFns.format(leaderboardData[4].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[4].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row6 =             this.add.text((window.screen.width / 2) - 399, 400 , `   5${leaderboardData[5].username.padStart(13)}${dateFns.format(leaderboardData[5].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[5].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row7 =             this.add.text((window.screen.width / 2) - 399, 450 , `   5${leaderboardData[6].username.padStart(13)}${dateFns.format(leaderboardData[6].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[6].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row8 =             this.add.text((window.screen.width / 2) - 399, 500 , `   5${leaderboardData[7].username.padStart(13)}${dateFns.format(leaderboardData[7].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[7].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row9 =             this.add.text((window.screen.width / 2) - 399, 550 , `   5${leaderboardData[8].username.padStart(13)}${dateFns.format(leaderboardData[8].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[8].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+            row10 =            this.add.text((window.screen.width / 2) - 399, 600 , `   5${leaderboardData[9].username.padStart(13)}${dateFns.format(leaderboardData[9].created_at, 'dd.MM.y').padStart(13)}${leaderboardData[9].score.toString().padStart(11)}`, { fontSize: '32px', fill: '#000' }, leaderBoardGroup);
+        } catch (error) {
+            console.log('failed to create all leaderboard rows, probably because they dont contain any data')
+        }
+            leaderBoardGroup.visible = false;
+    });
+    leaderBoardButton.visible = false;
+
     playButton = this.add.text((window.screen.width /2) - 150, 315, 'click to play!', { fontSize: '32px', fill: '#000' });
     playButton.setInteractive();
     playButton.on('pointerdown', () => { 
@@ -52,17 +81,20 @@ function create ()
         firstSpace = true;
     });
 
+
     playAgainButton = this.add.text((window.screen.width /2) - 180, 315, 'click to play again!', { fontSize: '32px', fill: '#000' });
     playAgainButton.setInteractive();
     playAgainButton.on('pointerdown', () => {
         pause = false;
-        playAgainButton.visible = false;
         startTime = Date.now();
         firstSpace = true;
         init();
         gameOver = false;
-        console.log('again')
         loseText.visible = false;
+        playAgainButton.visible = false;
+        leaderBoardButton.visible = false;
+        enterName.visible = false;
+        enterUsernameText.destroy();
     });
     playAgainButton.visible = false;
 
@@ -106,6 +138,42 @@ function create ()
     this.physics.add.overlap(player, bar, hitObstacle);
 
     scoreText = this.add.text(16, 16, 'press space', { fontSize: '32px', fill: '#000' });
+    enterUsernameText = this.add.text((window.screen.width / 2) - 350, 550 , username, { fontSize: '32px', fill: '#000' });
+    loseText = this.add.text((window.screen.width / 2) - 200, 350 , 'better luck next time..', { fontSize: '32px', fill: '#000' });
+    loseText.visible = false;
+    enterName = this.add.text((window.screen.width / 2) - 350, 385 , 'type in a username and submit with enter :)', { fontSize: '32px', fill: '#000' });
+    enterName.visible = false;
 
+
+    leaderboardBG = this.add.sprite(0 ,0, 'leaderboard_bg');
+    leaderboardBG.setScale(Math.max(window.screen.width / leaderboardBG.width, window.screen.height / leaderboardBG.height));
+    leaderboardBG.visible = false;
+
+    backButton = this.add.text((window.screen.width /4) - 200, 600, 'back', { fontSize: '32px', fill: '#000' });
+    backButton.setInteractive();
+    backButton.on('pointerdown', () => { 
+        backButton.visible = false;
+        leaderBoardButton.visible = false;
+        leaderBoardGroup.visible = false;
+        leaderboardTitel.visible = false;
+        try {
+            row1.visible = false;
+            row2.visible = false;
+            row3.visible = false;
+            row4.visible = false;
+            row5.visible = false;
+            row6.visible = false;
+            row7.visible = false;
+            row8.visible = false;
+            row9.visible = false;
+            row10.visible = false;
+        } catch (error) {
+            console.log('failed to set some leaderboard rows invisible, probably because they dont exist..?')
+        }
+            leaderboardBG.visible = false;
+
+
+    });
+    backButton.visible = false;
 
 }

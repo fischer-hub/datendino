@@ -7,5 +7,6 @@ function preload ()
     this.load.image('bar', 'assets/bar.png');
     this.load.image('ground_invis', 'assets/platform_invisible.png');
     this.load.image('heart', 'assets/heart.png');
+    this.load.image('leaderboard_bg', 'assets/sky.png');
     //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 }

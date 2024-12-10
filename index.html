@@ -5,9 +5,12 @@
     <meta charset="UTF-8" />
     <title>Datendino</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.85.2/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@4.1.0/cdn.min.js"></script>
     <script src="src/preload.js"></script>
     <script src="src/create.js"></script>
     <script src="src/update.js"></script>
+    <script src="src/supabase.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -68,7 +71,11 @@
     let blinkingTimer = 0;
     let blinkingTimerDelta = 0;
     let pause = true;
-    
+    let username = '';
+    let deltaType = 0;
+    let leaderboardData = {};
+    (async () => {leaderboardData = await fetchData()})() 
+
     function init (){
         score = 0;
         scoreText;
@@ -118,7 +125,12 @@
         if (numHearts == 0){ heartDisplay1.visible = false;}
         
 
-        if(parseInt(numHearts) <= 0){ gameOver = true; }
+        if(parseInt(numHearts) <= 0){ 
+            gameOver = true;
+            loseText.visible = true;
+            enterName.visible = true;
+            leaderBoardButton.visible = true;
+        }
     }
 
 </script>
