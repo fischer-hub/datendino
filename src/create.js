@@ -74,6 +74,7 @@ function create ()
         playAgainButton.visible = false;
         leaderboardBG.visible = true;
         (async () => {leaderboardData = await fetchData()})()
+        if (username != '') { leaderboardData.push({score: score, created_at: dateFns.format(new Date(), 'MM-dd-y HH:mm:SS'), username: username}) }
         leaderboardData.sort(function (a, b) {return b.score - a.score});
         backButton.visible = true;
 
