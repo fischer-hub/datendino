@@ -101,7 +101,7 @@ function create ()
     });
     leaderBoardButton.visible = false;
 
-    playButton = this.add.text((window.screen.width /2) - 150, 315, 'click to play!', { fontSize: '32px', fill: '#000' });
+    playButton = this.add.text((window.screen.width /2) - 170, 315, 'click here to play!', { fontSize: '32px', fill: '#000' });
     playButton.setInteractive();
     playButton.on('pointerdown', () => { 
         pause = false;
