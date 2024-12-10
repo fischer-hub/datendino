@@ -19,6 +19,7 @@ function update ()
             //player.anims.play('turn');
         } */
         score = Math.floor((Date.now() - startTime) / 100);
+        speed = Math.max(((score/1000)+1) * 8, 8)
 
 
         if (!gameOver && !pause && firstSpace) {
@@ -46,15 +47,22 @@ function update ()
             this.ground_img.setTilePosition(this.cameras.main.scrollX);
             if (firstSpace) {scoreText.setText('Score: ' + score);}
             
-            if (bar.x < -10){
+            if (bar.x < -100){
+                bar = bar_arr[Math.floor(Math.random()*bar_arr.length)];
                 bar.x = window.screen.width + 10;
                 bar.y = Math.floor(Math.random() * (800 - 600 + 1)) + 600;
-            }else if (heart.x < -10){
-                heart.x = window.screen.width + (Math.floor(Math.random() * (1000 - 1 + 1)) + 1);
+                bar.angle = (Math.floor(Math.random() * (30 - 1))) * (Math.random() < 0.5 ? -1 : 1);
+                bar.setTint = '#4287f5';
+            }else if (pascal.x < -10){
+                pascal.x = window.screen.width + Math.floor(Math.random() * (2000 - 1 + 1)) + 1;
+                pascal.y = Math.floor(Math.random() * (800 - 570 + 1)) + 570;
+            }else if (heart.x < -1000){
+                heart.x = window.screen.width + (Math.floor(Math.random() * (2000 - 1 + 1)) + 1);
                 heart.visible = true;
             } else{
                 bar.x += -speed;
                 heart.x += -speed;
+                pascal.x += -speed;
             }
         } else if (gameOver) {
             playAgainButton.visible = true;

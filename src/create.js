@@ -2,10 +2,28 @@ function create ()
 {
     // add sprites to canvas
     this.add.image(400, 300, 'bg');
-
     //the width and height value could be the screen width and height
     //"background" is the name of your preloaded image
     this.background = this.add.tileSprite(0, 0, window.screen.width, 700, 'bg').setOrigin(0).setScrollFactor(0, 1);
+
+    pascal = this.physics.add.sprite(window.screen.width + 2 , 570, 'pascal').setScale(0.25);
+    pascal.body.setSize(100, 200);
+    pascal.body.setAllowGravity(false);
+
+    bar = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar');
+    bar.body.setAllowGravity(false);
+
+    bar_blue = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar_blue');
+    bar_blue.body.setAllowGravity(false);
+
+    bar_orange = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar_orange');
+    bar_orange.body.setAllowGravity(false);
+
+    bar_cyan = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar_cyan');
+    bar_cyan.body.setAllowGravity(false);
+
+    bar_arr = [bar, bar_blue, bar_cyan, bar_orange]
+
     this.ground_img = this.add.tileSprite(0, 630, window.screen.width, 50, 'ground').setScale(2).setOrigin(0).setScrollFactor(0, 1);
     
     //ground = this.physics.add.tileSprite(0, 0, window.screen.width / 2, 680, 'ground').setOrigin(0).setScrollFactor(0,1);
@@ -21,8 +39,7 @@ function create ()
     ground = this.physics.add.image(0, 680, 'ground_invis').setScale(2).refreshBody();
     ground.setCollideWorldBounds(true);
 
-    bar = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar');
-    bar.body.setAllowGravity(false);
+
     //bar.setTint = '#4287f5';
     //bar.setCollideWorldBounds(false);
     
@@ -136,6 +153,7 @@ function create ()
     //this.physics.add.collider(heart, ground);
     this.physics.add.overlap(player, heart, collectHearts);
     this.physics.add.overlap(player, bar, hitObstacle);
+    this.physics.add.overlap(player, pascal, hitObstacle);
 
     scoreText = this.add.text(16, 16, 'press space', { fontSize: '32px', fill: '#000' });
     enterUsernameText = this.add.text((window.screen.width / 2) - 350, 550 , username, { fontSize: '32px', fill: '#000' });
@@ -145,8 +163,7 @@ function create ()
     enterName.visible = false;
 
 
-    leaderboardBG = this.add.sprite(0 ,0, 'leaderboard_bg');
-    leaderboardBG.setScale(Math.max(window.screen.width / leaderboardBG.width, window.screen.height / leaderboardBG.height));
+    leaderboardBG = this.add.tileSprite(0, 0, window.screen.width, 700, 'leaderboard_bg').setOrigin(0).setScrollFactor(0, 1);
     leaderboardBG.visible = false;
 
     backButton = this.add.text((window.screen.width /4) - 200, 600, 'back', { fontSize: '32px', fill: '#000' });
