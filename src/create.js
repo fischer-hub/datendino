@@ -6,9 +6,21 @@ function create ()
     //"background" is the name of your preloaded image
     this.background = this.add.tileSprite(0, 0, window.screen.width, 700, 'bg').setOrigin(0).setScrollFactor(0, 1);
 
-    pascal = this.physics.add.sprite(window.screen.width + 2 , 570, 'pascal').setScale(0.25);
+    pascal = this.physics.add.sprite(window.screen.width + 200 , 570, 'pascal').setScale(0.25);
     pascal.body.setSize(100, 200);
     pascal.body.setAllowGravity(false);
+
+    sd = this.physics.add.sprite(window.screen.width + 600 , 300, 'sd').setScale(0.5);
+    sd.body.setAllowGravity(false);
+    sd.body.angle = 20;
+
+    regression = this.physics.add.sprite(window.screen.width + 200 , 200, 'regression').setScale(0.5);
+    regression.body.setAllowGravity(false);
+    regression.body.angle = 10;
+
+    ttest = this.physics.add.sprite(window.screen.width + 400 , 500, 'ttest');
+    ttest.body.setAllowGravity(false);
+    ttest.body.angle = -10;
 
     bar = this.physics.add.sprite(window.screen.width + 20 , 800, 'bar');
     bar.body.setAllowGravity(false);
@@ -39,9 +51,6 @@ function create ()
     ground = this.physics.add.image(0, 680, 'ground_invis').setScale(2).refreshBody();
     ground.setCollideWorldBounds(true);
 
-
-    //bar.setTint = '#4287f5';
-    //bar.setCollideWorldBounds(false);
     
     heart = this.physics.add.sprite(window.screen.width + 50 , 615, 'heart');
     heart.body.setAllowGravity(false);

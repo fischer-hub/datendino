@@ -12,6 +12,9 @@ function preload ()
     this.load.image('heart', 'assets/heart.png');
     this.load.image('leaderboard_bg', 'assets/sky.png');
     this.load.image('pascal', 'assets/pascallsches_drecieck.png');
+    this.load.image('regression', 'assets/regression.png');
+    this.load.image('ttest', 'assets/ttest.png');
+    this.load.image('sd', 'assets/sd.png');
     
     //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 }

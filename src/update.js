@@ -53,9 +53,24 @@ function update ()
                 bar.y = Math.floor(Math.random() * (800 - 600 + 1)) + 600;
                 bar.angle = (Math.floor(Math.random() * (30 - 1))) * (Math.random() < 0.5 ? -1 : 1);
                 bar.setTint = '#4287f5';
-            }else if (pascal.x < -10){
+            }else if (pascal.x < -100){
                 pascal.x = window.screen.width + Math.floor(Math.random() * (2000 - 1 + 1)) + 1;
                 pascal.y = Math.floor(Math.random() * (800 - 570 + 1)) + 570;
+            }else if (regression.x < -100){
+                regression.x = window.screen.width + Math.floor(Math.random() * (2000 - 1 + 1)) + 1;
+                regression.y = Math.floor(Math.random() * (800 - 100 + 1)) + 100;
+                regression.angle = (Math.floor(Math.random() * (30 - 1))) * (Math.random() < 0.5 ? -1 : 1);
+                regression.setScale(Phaser.Math.FloatBetween(0.1, 1));
+            }else if (ttest.x < -100){
+                ttest.x = window.screen.width + Math.floor(Math.random() * (2000 - 1 + 1)) + 1;
+                ttest.y = Math.floor(Math.random() * (800 - 100 + 1)) + 100;
+                ttest.angle = (Math.floor(Math.random() * (30 - 1))) * (Math.random() < 0.5 ? -1 : 1);
+                ttest.setScale(Phaser.Math.FloatBetween(0.1, 1));
+            }else if (sd.x < -100){
+                sd.x = window.screen.width + Math.floor(Math.random() * (2000 - 1 + 1)) + 1;
+                sd.y = Math.floor(Math.random() * (800 - 100 + 1)) + 100;
+                sd.angle = (Math.floor(Math.random() * (30 - 1))) * (Math.random() < 0.5 ? -1 : 1);
+                sd.setScale(Phaser.Math.FloatBetween(0.1, 1));
             }else if (heart.x < -1000){
                 heart.x = window.screen.width + (Math.floor(Math.random() * (2000 - 1 + 1)) + 1);
                 heart.visible = true;
@@ -63,6 +78,9 @@ function update ()
                 bar.x += -speed;
                 heart.x += -speed;
                 pascal.x += -speed;
+                regression.x += -(speed/2);
+                ttest.x += -(speed/2);
+                sd.x += -(speed/2);
             }
         } else if (gameOver) {
             playAgainButton.visible = true;
