@@ -100,7 +100,7 @@ function update ()
                     } else if (event.key.length === 1 && event.key.match(/[a-zA-Z0-9\s\-_]/) && username.length <= 13) {
                         username += event.key;
 
-                    } else if (event.keyCode === 13 && username.length > 0 && !username.trim()){
+                    } else if (event.keyCode === 13 && username.length > 0){
                         console.log('enter')
                         insertData({score: score, created_at: dateFns.format(new Date(), 'MM-dd-y HH:mm:SS'), username: username});
                     }

@@ -127,7 +127,7 @@ function create ()
     });
     playAgainButton.visible = false;
 
-
+    this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     // create animation for player object
     //this.anims.create({
     //    key: 'left',
