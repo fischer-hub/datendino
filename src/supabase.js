@@ -1,5 +1,5 @@
 // supabase stuff
-const supabaseClient = supabase.createClient('https://mmudxfcbitoyiyiizdfy.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdWR4ZmNiaXRveWl5aWl6ZGZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM4MzcxNTksImV4cCI6MjA0OTQxMzE1OX0.Mob30niNDKcBDgvzNR2vQMSm16-MgrxqxvTGcTzcN7g')
+const supabaseClient = supabase.createClient('https://rybieesubyhgzqfwavvt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5YmllZXN1YnloZ3pxZndhdnZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTQyMzgsImV4cCI6MjA2MzQ3MDIzOH0.5liz_z8IwY_ni_kzGr1FCq9Cig16NYyf5BdBLUYrzio')
 
 async function fetchData() {
     const { data, error } = await supabaseClient
